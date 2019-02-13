@@ -1,5 +1,5 @@
 Hands=load("../data/hands2D.mat");
-Hands
+
 %pause(10)
 %{
 we shall now plot all the variations in the given dataset
@@ -9,7 +9,7 @@ can use them in our shape allignment alogrithm.
 NumOfPointSets=40
 NumOfPoints=56
 EllipsesPointset=Hands.shapes
-
+disp("all data")
 plot(squeeze(EllipsesPointset(1,:,:)),squeeze(EllipsesPointset(2,:,:)));
 pause(15)
 EllipsesPointset=normalize(EllipsesPointset-mean(EllipsesPointset,2),2);
@@ -30,6 +30,7 @@ the plot will stay for 10 seconds
 %}
 
 PlotableOutput=permute(AllignedShapes,[2,3,1])
+disp("alligned data")
 Gx=squeeze(PlotableOutput(1,:,:))
 Gy=squeeze(PlotableOutput(2,:,:))
 plot(Gx,Gy);
@@ -40,6 +41,7 @@ Now we shall observe the plot of the Eigenvalues i.e corresponding to the
 modes of variation in the alligned pointsets.
 the plot will stay for 10 seconds
 %}
+disp("Eigen values")
 plot(EigenValues)
 pause(15)
 
@@ -53,8 +55,10 @@ The plot shall be displayed for 5 seconds
 
 Mode1NegativeB=reshape(MeanVector -2*squeeze(transpose(EigenVectors(:,1))),[2,NumOfPoints])
 Mode1PositveB=reshape(MeanVector + 2*squeeze(transpose(EigenVectors(:,1))),[2,NumOfPoints])
+disp("Mode1positiveB")
 plot(Mode1PositveB(1,:),Mode1PositveB(2,:))
 pause(15)
+disp("Mode1negativeB")
 plot(Mode1NegativeB(1,:),Mode1NegativeB(2,:))
 pause(15)
 
@@ -66,8 +70,10 @@ The plot shall be displayed for 5 seconds
 
 Mode2NegativeB=reshape(MeanVector -2*squeeze(transpose(EigenVectors(:,2))),[2,NumOfPoints])
 Mode2PositveB=reshape(MeanVector + 2*squeeze(transpose(EigenVectors(:,2))),[2,NumOfPoints])
+disp("Mode2PositiveB")
 plot(Mode2PositveB(1,:),Mode2PositveB(2,:))
 pause(15)
+disp("Mode2NegativeB")
 plot(Mode2NegativeB(1,:),Mode2NegativeB(2,:))
 pause(15)
 
@@ -128,6 +134,7 @@ not differ to the current target shape by alot.(L1 norm is less than some thresh
         PlotableOutput=ShapeMean
         Gx=squeeze(PlotableOutput(1,:))
         Gy=squeeze(PlotableOutput(2,:))
+        disp("interim mean")
         plot(Gx,Gy);
         pause(15)
         

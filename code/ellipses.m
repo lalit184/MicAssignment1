@@ -10,8 +10,9 @@ NumOfPointSets=Ellipses.numOfPointSets
 NumOfPoints=Ellipses.numOfPoints
 EllipsesPointset=Ellipses.pointSets
 
+disp("All Data")
 plot(squeeze(EllipsesPointset(1,:,:)),squeeze(EllipsesPointset(2,:,:)));
-pause(15)
+pause(5)
 EllipsesPointset=normalize(EllipsesPointset-mean(EllipsesPointset,2),2);
 EllipsesPointset=permute(EllipsesPointset,[3,2,1])
 
@@ -32,16 +33,18 @@ the plot will stay for 10 seconds
 PlotableOutput=permute(AllignedShapes,[2,3,1])
 Gx=squeeze(PlotableOutput(1,:,:))
 Gy=squeeze(PlotableOutput(2,:,:))
+disp("alligned Data")
 plot(Gx,Gy);
-pause(15)
+pause(5)
 
 %{
 Now we shall observe the plot of the Eigenvalues i.e corresponding to the
 modes of variation in the alligned pointsets.
 the plot will stay for 10 seconds
 %}
+disp("Eigenn Values")
 plot(EigenValues)
-pause(15)
+pause(5)
 
 MeanVector=reshape(MeanShape,[1,2*NumOfPoints])
 
@@ -53,10 +56,12 @@ The plot shall be displayed for 5 seconds
 
 Mode1NegativeB=reshape(MeanVector -2*squeeze(transpose(EigenVectors(:,1))),[2,NumOfPoints])
 Mode1PositveB=reshape(MeanVector + 2*squeeze(transpose(EigenVectors(:,1))),[2,NumOfPoints])
+disp("Mode1PositiveB")
 plot(Mode1PositveB(1,:),Mode1PositveB(2,:))
-pause(15)
+pause(5)
+disp("Mode1NegativeB")
 plot(Mode1NegativeB(1,:),Mode1NegativeB(2,:))
-pause(15)
+pause(5)
 
 %{
 Now we shall observe the variation of the shape w.r.t. to the SECOND mode 
@@ -66,10 +71,12 @@ The plot shall be displayed for 5 seconds
 
 Mode2NegativeB=reshape(MeanVector -2*squeeze(transpose(EigenVectors(:,2))),[2,NumOfPoints])
 Mode2PositveB=reshape(MeanVector + 2*squeeze(transpose(EigenVectors(:,2))),[2,NumOfPoints])
+disp("Mode2PositiveB")
 plot(Mode2PositveB(1,:),Mode2PositveB(2,:))
-pause(15)
+pause(5)
+disp("Mode2NnegativeB")
 plot(Mode2NegativeB(1,:),Mode2NegativeB(2,:))
-pause(15)
+pause(5)
 
 function [X] = Allign2(target,shape,NumOfPoints,NumOfPointSets)
 %{
@@ -128,8 +135,9 @@ not differ to the current target shape by alot.(L1 norm is less than some thresh
         PlotableOutput=ShapeMean
         Gx=squeeze(PlotableOutput(1,:))
         Gy=squeeze(PlotableOutput(2,:))
+        disp("interim mean")
         plot(Gx,Gy);
-        pause(15)
+        pause(5)
         
         
         if abs(sum(CurrentTarget-NewTarget,'all'))<0.00001
